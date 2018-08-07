@@ -22,10 +22,10 @@ define(
                         });
                     });
 
-                    $.fn.datetimepicker.dates[options.language] = languageOptions;
+                    // $.fn.datetimepicker.dates[options.language] = languageOptions;
                 }
 
-                $target.datetimepicker(options);
+                // $target.datetimepicker(options);
 
                 return $target;
             }
