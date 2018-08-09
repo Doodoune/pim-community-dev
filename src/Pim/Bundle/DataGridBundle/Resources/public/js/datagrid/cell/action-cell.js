@@ -27,7 +27,6 @@ define(
             initialize: function() {
                 Backgrid.Cell.prototype.initialize.apply(this, arguments);
                 this.actions = this.createActions();
-
                 this.launchers = this.createLaunchers();
             },
 
@@ -85,18 +84,25 @@ define(
                 });
             },
 
+
             /**
              * Render cell with actions
              */
             render: function () {
                 this.$el.empty();
-                var iconsList = $('<div>').addClass('AknButtonList AknButtonList--right');
-                if (!_.isEmpty(this.launchers)) {
-                    _.each(this.launchers, function(launcher) {
-                        iconsList.append(launcher.render().$el);
-                    }, this);
+
+                const iconsList = document.createElement('div');
+
+                iconsList.classList.add('AknButtonList')
+                iconsList.classList.add('AknButtonList--right')
+
+                if (this.launchers) {
+                    this.launchers.forEach(launcher => {
+                        iconsList.appendChild(launcher.render().el)
+                    })
+
+                    this.el.appendChild(iconsList)
                 }
-                this.$el.append(iconsList);
 
                 return this;
             }
