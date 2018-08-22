@@ -12,6 +12,11 @@
 - PIM-7626: Fix attribute groups order in the product grid's column configurator
 - PIM-7631: Fix API filter product and product model on date with between operator
 - PIM-7613: Fix translations of boolean attributes
+- PIM-7594: Fix memory leak in `pim:versioning:purge` command
+
+## BC breaks
+
+- PIM-7594: Method `Pim\Bundle\VersioningBundle\Repository\VersionRepositoryInterface::findPotentiallyPurgeableBy` returns now an CursorInterface
 
 # 2.3.5 (2018-08-22)
 
