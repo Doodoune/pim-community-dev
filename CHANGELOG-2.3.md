@@ -3,6 +3,7 @@
 ## Enhancements
 
 - PIM-7610: Add a command to create users
+- PIM-7612: Add the media/cache/{filter}/{path} route support in order to handle scalable frontend architecture for media content delivering
 
 ## Bug fixes
 
