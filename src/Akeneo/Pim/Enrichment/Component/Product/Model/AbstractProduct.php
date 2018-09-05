@@ -6,8 +6,8 @@ use Akeneo\Pim\Enrichment\Component\Category\Model\CategoryInterface;
 use Akeneo\Pim\Structure\Component\AttributeTypes;
 use Akeneo\Pim\Structure\Component\Model\AssociationTypeInterface;
 use Akeneo\Pim\Structure\Component\Model\AttributeGroupInterface;
-use Akeneo\Pim\Structure\Component\Model\AttributeInterface;
 use Akeneo\Pim\Structure\Component\Model\FamilyInterface;
+use Akeneo\Pim\Structure\Component\Model\AttributeInterface;
 use Akeneo\Pim\Structure\Component\Model\FamilyVariantInterface;
 use Akeneo\Tool\Component\Classification\Model\CategoryInterface as BaseCategoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -220,9 +220,9 @@ abstract class AbstractProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getUsedAttributeCodes()
+    public function getUsedAttributeCodes(): array
     {
-        return $this->values->getAttributesKeys();
+        return $this->values->getAttributeCodes();
     }
 
     /**
@@ -254,7 +254,7 @@ abstract class AbstractProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute(AttributeInterface $attribute)
+    public function usesAttribute(string $attribute): bool
     {
         return in_array($attribute, $this->getValues()->getAttributes(), true);
     }
@@ -313,7 +313,7 @@ abstract class AbstractProduct implements ProductInterface
     {
         $this->identifier = $identifier->getData();
 
-        $this->values->removeByAttribute($identifier->getAttribute());
+        $this->values->removeByAttributeCode($identifier->getAttributeCode());
         $this->values->add($identifier);
 
         return $this;

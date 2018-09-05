@@ -6,8 +6,8 @@ use Akeneo\Pim\Enrichment\Component\Product\Factory\ValueFactory;
 use Akeneo\Pim\Enrichment\Component\Product\Manager\AttributeValuesResolverInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Model\EntityWithValuesInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Model\ProductInterface;
+use Akeneo\Pim\Enrichment\Component\Product\Model\ValueInterface;
 use Akeneo\Pim\Structure\Component\AttributeTypes;
-use Akeneo\Pim\Structure\Component\Model\AttributeInterface;
 
 /**
  * @author    Julien Janvier <julien.janvier@akeneo.com>
@@ -51,11 +51,11 @@ class EntityWithValuesBuilder implements EntityWithValuesBuilderInterface
      */
     public function addOrReplaceValue(
         EntityWithValuesInterface $entityWithValues,
-        AttributeInterface $attribute,
-        $locale,
-        $scope,
+        string $attributeCode,
+        ?string $localeCode,
+        ?string $scope,
         $data
-    ) {
+    ) : ValueInterface {
         $value = $entityWithValues->getValue($attribute->getCode(), $locale, $scope);
         if (null !== $value) {
             $entityWithValues->removeValue($value);

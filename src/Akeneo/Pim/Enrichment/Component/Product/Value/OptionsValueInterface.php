@@ -15,19 +15,11 @@ use Akeneo\Pim\Structure\Component\Model\AttributeOptionInterface;
 interface OptionsValueInterface extends ValueInterface
 {
     /**
-     * @return AttributeOptionInterface[]
+     * Return options codes
      */
-    public function getData();
+    public function getData(): array;
 
-    /**
-     * @param string $code
-     *
-     * @return bool
-     */
-    public function hasCode($code);
+    public function hasCode(string $code): bool;
 
-    /**
-     * @return array
-     */
-    public function getOptionCodes();
+    public function getOptionCodes(): array;
 }

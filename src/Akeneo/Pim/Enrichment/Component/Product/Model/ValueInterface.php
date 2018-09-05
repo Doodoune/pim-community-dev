@@ -22,43 +22,28 @@ interface ValueInterface
 
     /**
      * Get attribute
-     *
-     * @return AttributeInterface
      */
-    public function getAttribute();
+    public function getAttributeCode(): string;
 
     /**
-     * Get used locale
-     *
-     * @return string
+     * Get used locale code
      */
-    public function getLocale();
+    public function getLocaleCode(): ?string;
 
     /**
      * Check if the value contains data
-     *
-     * @return bool
      */
-    public function hasData();
+    public function hasData(): bool;
 
     /**
      * Get used scope
-     *
-     * @return string $scope
      */
-    public function getScope();
+    public function getScopeCode(): ?string;
 
     /**
      * Checks that the product value is equal to another.
-     *
-     * @param ValueInterface $value
-     *
-     * @return bool
      */
-    public function isEqual(ValueInterface $value);
+    public function isEqual(ValueInterface $value): bool;
 
-    /**
-     * @return string
-     */
-    public function __toString();
+    public function __toString(): string;
 }

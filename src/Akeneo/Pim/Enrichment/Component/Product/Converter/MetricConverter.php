@@ -44,23 +44,22 @@ class MetricConverter
         $channelUnits = $channel->getConversionUnits();
         foreach ($entityWithValues->getValues() as $value) {
             $data = $value->getData();
-            $attribute = $value->getAttribute();
-            if ($data instanceof MetricInterface && isset($channelUnits[$attribute->getCode()])) {
+            if ($data instanceof MetricInterface && isset($channelUnits[$value->getAttributeCode()])) {
                 if (null === $data->getData()) {
                     continue;
                 }
 
                 $measureFamily = $data->getFamily();
-                $channelUnit = $channelUnits[$attribute->getCode()];
+                $channelUnit = $channelUnits[$value->getAttributeCode()];
                 $amount = $this->converter
                     ->setFamily($measureFamily)
                     ->convert($data->getUnit(), $channelUnit, $data->getData());
 
                 $this->entityWithValuesBuilder->addOrReplaceValue(
                     $entityWithValues,
-                    $attribute,
-                    $value->getLocale(),
-                    $value->getScope(),
+                    $value->getAttributeCode(),
+                    $value->getLocaleCode(),
+                    $value->getScopeCode(),
                     ['amount' => $amount, 'unit' => $channelUnit]
                 );
             }

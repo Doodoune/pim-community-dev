@@ -3,7 +3,6 @@
 namespace Akeneo\Pim\Enrichment\Component\Product\Value;
 
 use Akeneo\Pim\Enrichment\Component\Product\Model\ValueInterface;
-use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
 
 /**
  * Interface for media product value
@@ -14,8 +13,5 @@ use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
  */
 interface MediaValueInterface extends ValueInterface
 {
-    /**
-     * @return FileInfoInterface|null
-     */
-    public function getData();
+    public function getData(): string;
 }

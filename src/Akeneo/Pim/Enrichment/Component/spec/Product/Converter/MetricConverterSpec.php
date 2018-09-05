@@ -35,30 +35,30 @@ class MetricConverterSpec extends ObjectBehavior
     ) {
         $channel->getConversionUnits()->willReturn(['weight' => 'GRAM']);
 
-        $weightValue->getAttribute()->willReturn($weight);
+        $weightValue->getAttributeCode()->willReturn('weight');
         $weightValue->getData()->willReturn($weightMetric);
-        $weightValue->getLocale()->willReturn(null);
-        $weightValue->getScope()->willReturn(null);
+        $weightValue->getLocaleCode()->willReturn(null);
+        $weightValue->getScopeCode()->willReturn(null);
         $weight->getCode()->willReturn('weight');
 
         $weightMetric->getFamily()->willReturn('Weight');
         $weightMetric->getUnit()->willReturn('KILOGRAM');
         $weightMetric->getData()->willReturn(1);
 
-        $surfaceValue->getAttribute()->willReturn($surface);
+        $surfaceValue->getAttributeCode()->willReturn('surface');
         $surfaceValue->getData()->willReturn($surfaceMetric);
-        $surfaceValue->getLocale()->shouldNotBeCalled();
-        $surfaceValue->getScope()->shouldNotBeCalled();
+        $surfaceValue->getLocaleCode()->shouldNotBeCalled();
+        $surfaceValue->getScopeCode()->shouldNotBeCalled();
         $surface->getCode()->willReturn('surface');
 
         $surfaceMetric->getFamily()->willReturn('Surface');
         $surfaceMetric->getUnit()->willReturn('METER_SQUARE');
         $surfaceMetric->getData()->willReturn(10);
 
-        $nameValue->getAttribute()->willReturn($name);
+        $nameValue->getAttributeCode()->willReturn('name');
         $nameValue->getData()->willReturn('foobar');
-        $nameValue->getLocale()->shouldNotBeCalled();
-        $nameValue->getScope()->shouldNotBeCalled();
+        $nameValue->getLocaleCode()->shouldNotBeCalled();
+        $nameValue->getScopeCode()->shouldNotBeCalled();
 
         $product->getValues()->willReturn([$weightValue, $surfaceValue, $nameValue]);
 
@@ -69,7 +69,7 @@ class MetricConverterSpec extends ObjectBehavior
 
         $productBuilder->addOrReplaceValue(Argument::cetera())->shouldBeCalledTimes(1);
         $productBuilder
-            ->addOrReplaceValue($product, $weight, null, null, ['amount' => 1000, 'unit' => 'GRAM'])
+            ->addOrReplaceValue($product, 'weight', null, null, ['amount' => 1000, 'unit' => 'GRAM'])
             ->shouldBeCalled();
 
         $this->convert($product, $channel);
@@ -79,14 +79,12 @@ class MetricConverterSpec extends ObjectBehavior
         $converter,
         $productBuilder,
         ValueInterface $weightValue,
-        AttributeInterface $weight,
         MetricInterface $weightMetric,
         ProductInterface $product,
         ChannelInterface $channel
     ) {
-        $weightValue->getAttribute()->willReturn($weight);
+        $weightValue->getAttributeCode()->willReturn('weight');
         $weightValue->getData()->willReturn($weightMetric);
-        $weight->getCode()->willReturn('weight');
 
         $weightMetric->getFamily()->willReturn('Weight');
         $weightMetric->getUnit()->willReturn(null);

@@ -3,8 +3,6 @@
 namespace Akeneo\Pim\Enrichment\Component\Product\Value;
 
 use Akeneo\Pim\Enrichment\Component\Product\Model\AbstractValue;
-use Akeneo\Pim\Structure\Component\Model\AttributeInterface;
-use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
 
 /**
  * Product value for attribute types:
@@ -17,28 +15,21 @@ use Akeneo\Tool\Component\FileStorage\Model\FileInfoInterface;
  */
 class MediaValue extends AbstractValue implements MediaValueInterface
 {
-    /** @var FileInfoInterface */
+    /** @var string FileInfo key */
     protected $data;
 
     /**
-     * @param AttributeInterface     $attribute
-     * @param string                 $channel
-     * @param string                 $locale
-     * @param FileInfoInterface|null $data
+     * {@inheritdoc}
      */
-    public function __construct(AttributeInterface $attribute, $channel, $locale, FileInfoInterface $data = null)
+    protected function __construct(string $attributeCode, string $data, ?string $scopeCode, ?string $localeCode)
     {
-        $this->setAttribute($attribute);
-        $this->setScope($channel);
-        $this->setLocale($locale);
-
-        $this->data = $data;
+        parent::__construct($attributeCode, $data, $scopeCode, $localeCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }
@@ -46,8 +37,8 @@ class MediaValue extends AbstractValue implements MediaValueInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return null !== $this->data ? $this->data->getKey() : '';
+        return null !== $this->data ? $this->data : '';
     }
 }

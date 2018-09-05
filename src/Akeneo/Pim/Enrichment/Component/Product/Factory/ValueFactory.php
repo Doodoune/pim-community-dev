@@ -61,7 +61,7 @@ class ValueFactory
         }
 
         $factory = $this->getFactory($attribute->getType());
-        $value = $factory->create($attribute, $channelCode, $localeCode, $data);
+        $value = $factory->create($attribute->getCode(), $channelCode, $localeCode, $data);
 
         return $value;
     }
