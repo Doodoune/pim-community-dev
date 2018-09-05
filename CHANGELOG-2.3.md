@@ -1,5 +1,7 @@
 # 2.3.x
 
+# 2.3.6 (2018-09-05)
+
 ## Enhancements
 
 - PIM-7610: Add a command to create users
